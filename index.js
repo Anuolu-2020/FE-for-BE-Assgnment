@@ -3,36 +3,10 @@ let feedbackElement = document.getElementById("feedback");
 let networkLogo = document.getElementById("networkLogo");
 let networkCarrier = document.getElementById("network-carrier");
 
-let mtn = false;
-let airtel = false;
-let glo = false;
-let Nmobile = false;
-
-switch (networkCarrier.value) {
-  case "detect":
-    mtn = true;
-    airtel = true;
-    glo = true;
-    Nmobile = true;
-    break;
-  case "mtn":
-    mtn = true;
-    break;
-  case "airtel":
-    airtel = true;
-    break;
-  case "glo":
-    glo = true;
-    break;
-  case "9mobile":
-    Nmobile = true;
-    break;
-  default:
-    mtn = false;
-    airtel = false;
-    glo = false;
-    Nmobile = false;
-}
+// let mtn = false;
+// let airtel = false;
+// let glo = false;
+// let Nmobile = false;
 
 userInputElement.oninput = function () {
   console.log(networkCarrier.value);
@@ -44,12 +18,15 @@ userInputElement.oninput = function () {
   let newIntNumCode = intNumCode.replace("+234", "0");
 
   let foundProvider = false;
-
-  if (numCode.startsWith("0")) {
-    userInputElement.maxLength = "11";
-  } else {
-    userInputElement.maxLength = "14";
+  function detectNumberPattern() {
+    if (numCode.startsWith("0")) {
+      userInputElement.maxLength = "11";
+    } else {
+      userInputElement.maxLength = "14";
+    }
   }
+
+  detectNumberPattern();
 
   let mtn = [
     "0803",
@@ -70,10 +47,10 @@ userInputElement.oninput = function () {
 
   let Nmobile = ["0909", "0908", "0818", "0809", "0817"];
 
-  if (mtn) {
+  function mtnValidator() {
     for (let i = 0; i < mtn.length; i++) {
       if (numCode.startsWith(mtn[i]) || newIntNumCode.startsWith(mtn[i])) {
-        feedbackElement.innerText = `The number ${phoneNum} is MTN`;
+        // feedbackElement.innerText = `The number ${phoneNum} is MTN`;
         networkLogo.src = "./assets/mtn.png";
         userInputElement.style.borderColor = "Yellow";
         foundProvider = true;
@@ -81,10 +58,10 @@ userInputElement.oninput = function () {
     }
   }
 
-  if (glo) {
+  function gloValidator() {
     for (let i = 0; i < glo.length; i++) {
       if (numCode.startsWith(glo[i]) || newIntNumCode.startsWith(glo[i])) {
-        feedbackElement.innerText = `The number ${phoneNum} is Glo`;
+        // feedbackElement.innerText = `The number ${phoneNum} is Glo`;
         networkLogo.src = "./assets/glo.jpeg";
         userInputElement.style.borderColor = "Green";
         foundProvider = true;
@@ -92,13 +69,13 @@ userInputElement.oninput = function () {
     }
   }
 
-  if (airtel) {
+  function airtelValidator() {
     for (let i = 0; i < airtel.length; i++) {
       if (
         numCode.startsWith(airtel[i]) ||
         newIntNumCode.startsWith(airtel[i])
       ) {
-        feedbackElement.innerText = `The number ${phoneNum} is airtel`;
+        // feedbackElement.innerText = `The number ${phoneNum} is airtel`;
         networkLogo.src = "./assets/airtel.jpeg";
         userInputElement.style.borderColor = "Red";
         foundProvider = true;
@@ -106,19 +83,48 @@ userInputElement.oninput = function () {
     }
   }
 
-  if (Nmobile) {
+  function NmobileValidator() {
     for (let i = 0; i < Nmobile.length; i++) {
       if (
         numCode.startsWith(Nmobile[i]) ||
         newIntNumCode.startsWith(Nmobile[i])
       ) {
-        feedbackElement.innerText = `The number ${phoneNum} is 9mobile`;
+        // feedbackElement.innerText = `The number ${phoneNum} is 9mobile`;
         networkLogo.src = "./assets/9mobile.png";
         userInputElement.style.borderColor = "darkgreen";
         networkCarrier.option.value = "9MOBILE";
         foundProvider = true;
       }
     }
+  }
+
+  switch (networkCarrier.value) {
+    case "Detect":
+      detectNumberPattern();
+      mtnValidator();
+      airtelValidator();
+      gloValidator();
+      NmobileValidator();
+      break;
+    case "mtn":
+      detectNumberPattern();
+      mtnValidator();
+      break;
+    case "airtel":
+      detectNumberPattern();
+      airtelValidator();
+      break;
+    case "glo":
+      detectNumberPattern();
+      gloValidator();
+      break;
+    case "9mobile":
+      detectNumberPattern();
+      NmobileValidator();
+      break;
+    default:
+      userInputElement.maxLength = "1";
+      feedbackElement.innerText = `Please pick a network or pick detect`;
   }
 
   if (!foundProvider) {
