@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PURCHASE AIRTIME</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="form__wrapper">
+      <div class="alert">You Have Successful Purchased N2000 Airtime</div>
+      <div class="form__header">
+        <h3 class="form__header-text">Buy airtime</h3>
+      </div>
+      <form action="index.html" class="form" autocomplete="off" novalidate>
+        <div class="form__input-wrapper" id="amount-field-wrapper">
+          <label for="airtime-amount" class="form__label">Airtime amount</label>
+          <input
+            type="number"
+            class="form__input-field"
+            id="airtime-amount"
+            autocomplete="off"
+            required />
+        </div>
+        <div class="form__input-wrapper">
+          <label for="network-carrier" class="form__label"
+            >Choose network carrier
+          </label>
+          <select
+            name="network-carrier"
+            id="network-carrier"
+            class="form__dropdown">
+            <option value="">--Please choose an option--</option>
+            <option value="Detect">DETECT</option>
+            <option value="mtn">MTN</option>
+            <option value="airtel">AIRTEL</option>
+            <option value="glo">GLO</option>
+            <option value="9mobile">9MOBILE</option>
+          </select>
+        </div>
+        <div class="form__input-wrapper" id="number-field-wrapper">
+          <label for="phone-number" class="form__label">Phone number</label>
+          <div class="form__input-flex">
+            <input
+              type="text"
+              class="form__input-field form__input-field--number"
+              id="phone-number"
+              minlength="0"
+              maxlength="14"
+              required />
+            <img class="form__input-icon" id="networkLogo" />
+          </div>
+          <div id="feedback"></div>
+        </div>
+        <input type="submit" class="form__submit-btn btn" value="PURCHASE" />
+      </form>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
