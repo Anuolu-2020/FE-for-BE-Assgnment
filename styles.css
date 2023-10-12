@@ -114,14 +114,13 @@ body {
 .alert {
   width: min(36rem, 100% - 2rem);
   color: white;
-  display: none;
   padding: 1rem;
   border-radius: 0.8rem;
+  display: none;
   position: absolute;
   top: 10%;
   left: 50%;
   transform: translateX(-50%);
-  opacity: 1;
   transition: all 0.4s;
   border-width: 2px;
   border-style: solid;
@@ -129,6 +128,7 @@ body {
   border: 2px solid white;
   background-color: rgb(9, 165, 9);
 }
+
 .alert--failed {
   opacity: 1;
   border: 2px solid #fa5252;

@@ -53,6 +53,7 @@ userInputElement.oninput = function () {
         // feedbackElement.innerText = `The number ${phoneNum} is MTN`;
         networkLogo.src = "./assets/mtn.png";
         userInputElement.style.borderColor = "Yellow";
+        networkCarrier.value = "mtn";
         foundProvider = true;
       }
     }
@@ -64,6 +65,7 @@ userInputElement.oninput = function () {
         // feedbackElement.innerText = `The number ${phoneNum} is Glo`;
         networkLogo.src = "./assets/glo.jpeg";
         userInputElement.style.borderColor = "Green";
+        networkCarrier.value = "glo";
         foundProvider = true;
       }
     }
@@ -78,6 +80,7 @@ userInputElement.oninput = function () {
         // feedbackElement.innerText = `The number ${phoneNum} is airtel`;
         networkLogo.src = "./assets/airtel.jpeg";
         userInputElement.style.borderColor = "Red";
+        networkCarrier.value = "airtel";
         foundProvider = true;
       }
     }
@@ -92,7 +95,7 @@ userInputElement.oninput = function () {
         // feedbackElement.innerText = `The number ${phoneNum} is 9mobile`;
         networkLogo.src = "./assets/9mobile.png";
         userInputElement.style.borderColor = "darkgreen";
-        networkCarrier.option.value = "9MOBILE";
+        networkCarrier.value = "9mobile";
         foundProvider = true;
       }
     }
@@ -144,3 +147,23 @@ userInputElement.oninput = function () {
     userInputElement.style.borderColor = "rgb(76, 110, 245)";
   }
 };
+
+let amount = document.getElementById("airtime-amount");
+let alertPurchase = document.getElementById("alertPurchase");
+
+// function validateNumber() {
+//   if (
+//     userInputElement.maxLength != "11" ||
+//     userInputElement.maxLength != "14"
+//   ) {
+//     alertPurchase.style.backgroundColor = "red";
+//     alertPurchase.style.display = "block";
+//     alertPurchase.innerText = "Phone Number not complete";
+//   }
+// }
+
+document.getElementById("purchaseForm").addEventListener("submit", () => {
+  alertPurchase.style.display = "block";
+  alertPurchase.style.backgroundColor = "green";
+  alertPurchase.textContent = `You have Successfully Purchased ${amount.value} ${networkCarrier.value} Airtime`;
+});

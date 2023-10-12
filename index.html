@@ -8,11 +8,11 @@
   </head>
   <body>
     <div class="form__wrapper">
-      <div class="alert">You Have Successful Purchased N2000 Airtime</div>
+      <div class="alert" id="alertPurchase"></div>
       <div class="form__header">
         <h3 class="form__header-text">Buy airtime</h3>
       </div>
-      <form action="index.html" class="form" autocomplete="off" novalidate>
+      <form action="index.html" class="form" id="purchaseForm" validate>
         <div class="form__input-wrapper" id="amount-field-wrapper">
           <label for="airtime-amount" class="form__label">Airtime amount</label>
           <input
@@ -52,7 +52,12 @@
           </div>
           <div id="feedback"></div>
         </div>
-        <input type="submit" id='submit'   class="form__submit-btn btn" value="PURCHASE" />
+        <input
+          type="submit"
+          id="submit"
+          class="form__submit-btn btn"
+          value="PURCHASE"
+          autocomplete="off" />
       </form>
     </div>
     <script src="index.js"></script>
