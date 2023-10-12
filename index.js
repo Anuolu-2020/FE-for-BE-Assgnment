@@ -3,13 +3,10 @@ let feedbackElement = document.getElementById("feedback");
 let networkLogo = document.getElementById("networkLogo");
 let networkCarrier = document.getElementById("network-carrier");
 
-// let mtn = false;
-// let airtel = false;
-// let glo = false;
-// let Nmobile = false;
+let submit = document.getElementById("submit");
 
+//checks for input of the user immediately
 userInputElement.oninput = function () {
-  console.log(networkCarrier.value);
   let phoneNum = userInputElement.value;
 
   let numCode = phoneNum.substr(0, 4);
@@ -17,7 +14,9 @@ userInputElement.oninput = function () {
 
   let newIntNumCode = intNumCode.replace("+234", "0");
 
+  let selected = false;
   let foundProvider = false;
+
   function detectNumberPattern() {
     if (numCode.startsWith("0")) {
       userInputElement.maxLength = "11";
@@ -39,6 +38,7 @@ userInputElement.oninput = function () {
     "0903",
     "0703",
     "0906",
+    "0916",
   ];
 
   let glo = ["0805", "0905", "0807", "0811", "0705", "0815"];
@@ -100,6 +100,7 @@ userInputElement.oninput = function () {
 
   switch (networkCarrier.value) {
     case "Detect":
+      selected = true;
       detectNumberPattern();
       mtnValidator();
       airtelValidator();
@@ -107,28 +108,39 @@ userInputElement.oninput = function () {
       NmobileValidator();
       break;
     case "mtn":
+      selected = true;
       detectNumberPattern();
       mtnValidator();
       break;
     case "airtel":
+      selected = true;
       detectNumberPattern();
       airtelValidator();
       break;
     case "glo":
+      selected = true;
       detectNumberPattern();
       gloValidator();
       break;
     case "9mobile":
+      selected = true;
       detectNumberPattern();
       NmobileValidator();
       break;
     default:
+      selected = false;
       userInputElement.maxLength = "1";
-      feedbackElement.innerText = `Please pick a network or pick detect`;
   }
 
-  if (!foundProvider) {
+  if (!selected) {
+    feedbackElement.innerText = `Please pick a network or pick detect`;
+  } else {
+    feedbackElement.innerText = "";
+  }
+
+  if (selected && !foundProvider) {
     feedbackElement.innerText = `No network provider found`;
+    networkLogo.src = "";
     userInputElement.style.borderColor = "rgb(76, 110, 245)";
   }
 };
