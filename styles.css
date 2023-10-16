@@ -22,7 +22,18 @@ body {
   font-weight: 400;
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
+}
+
+#pageTitle {
+  position: absolute;
+  top: 30px;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  border: 4px;
 }
 
 .form {
@@ -101,6 +112,7 @@ body {
   color: #f8f9fa;
   font-weight: 500;
   transition: all 0.3s;
+  cursor: not-allowed;
 }
 .btn:hover {
   transform: translateY(-2px);
@@ -127,6 +139,7 @@ body {
   text-align: center;
   border: 2px solid white;
   background-color: rgb(9, 165, 9);
+  font-family: "Inter", sans-serif;
 }
 
 .alert--failed {
@@ -135,11 +148,6 @@ body {
   color: #fa5252;
 }
 
-/* .alert--success {
-  opacity: 1;
-  border: 2px solid #51cf66;
-  color: #51cf66;
-} /*# sourceMappingURL=main.css.map */
 #feedback {
   color: red;
 }

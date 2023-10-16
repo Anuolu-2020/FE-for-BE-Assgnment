@@ -16,8 +16,10 @@ amount.oninput = function () {
     alertAmount.style.display = "block";
     alertAmount.innerText = "Airtime Starts from N100";
     alertAmount.style.color = "red";
+    submit.disabled = true;
   } else {
     alertAmount.style.display = "none";
+    submit.disabled = false;
   }
 };
 
@@ -79,7 +81,7 @@ userInputElement.oninput = function () {
       if (numCode.startsWith(mtn[i]) || newIntNumCode.startsWith(mtn[i])) {
         networkLogo.src = "./assets/mtn.png";
         userInputElement.style.borderColor = "Yellow";
-        networkCarrier.value = "mtn";
+        networkCarrier.value = "Mtn";
         foundProvider = true; // updating the found provider
       }
     }
@@ -91,7 +93,7 @@ userInputElement.oninput = function () {
       if (numCode.startsWith(glo[i]) || newIntNumCode.startsWith(glo[i])) {
         networkLogo.src = "./assets/glo.jpeg";
         userInputElement.style.borderColor = "Green";
-        networkCarrier.value = "glo";
+        networkCarrier.value = "Glo";
         foundProvider = true;
       }
     }
@@ -107,7 +109,7 @@ userInputElement.oninput = function () {
         // feedbackElement.innerText = `The number ${phoneNum} is airtel`;
         networkLogo.src = "./assets/airtel.jpeg";
         userInputElement.style.borderColor = "Red";
-        networkCarrier.value = "airtel";
+        networkCarrier.value = "Airtel";
         foundProvider = true;
       }
     }
@@ -138,17 +140,17 @@ userInputElement.oninput = function () {
       gloValidator();
       NmobileValidator();
       break;
-    case "mtn":
+    case "Mtn":
       selected = true;
       detectNumberPattern();
       mtnValidator();
       break;
-    case "airtel":
+    case "Airtel":
       selected = true;
       detectNumberPattern();
       airtelValidator();
       break;
-    case "glo":
+    case "Glo":
       selected = true;
       detectNumberPattern();
       gloValidator();
@@ -177,6 +179,18 @@ userInputElement.oninput = function () {
     networkLogo.src = "";
     userInputElement.style.borderColor = "rgb(76, 110, 245)";
   }
+
+  //final phone number length validator
+  if (
+    userInputElement.value.length !== 11 &&
+    userInputElement.value.length !== 14
+  ) {
+    submit.style.cursor = "not-allowed";
+    submit.disabled = true;
+  } else {
+    submit.style.cursor = "pointer";
+    submit.disabled = false;
+  }
 };
 
 //Reference to display message
@@ -186,5 +200,5 @@ let alertPurchase = document.getElementById("alertPurchase");
 document.getElementById("purchaseForm").addEventListener("submit", () => {
   alertPurchase.style.display = "block";
   alertPurchase.style.backgroundColor = "green";
-  alertPurchase.textContent = `You have Successfully Purchased ${amount.value} ${networkCarrier.value} Airtime`;
+  alertPurchase.textContent = `You have Successfully Purchased ${amount.value} worth of ${networkCarrier.value} Airtime for ${userInputElement.value}`;
 });
