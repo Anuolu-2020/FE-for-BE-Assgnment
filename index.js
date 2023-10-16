@@ -3,8 +3,23 @@ let userInputElement = document.getElementById("phone-number");
 let feedbackElement = document.getElementById("feedback");
 let networkLogo = document.getElementById("networkLogo");
 let networkCarrier = document.getElementById("network-carrier");
+let alertAmount = document.getElementById("alertAmount");
+
+//Value of airtime amount user inputted
+let amount = document.getElementById("airtime-amount");
 
 let submit = document.getElementById("submit");
+
+//Amount validator
+amount.oninput = function () {
+  if (amount.value / 2 < 50 || amount.value % 2 !== 0) {
+    alertAmount.style.display = "block";
+    alertAmount.innerText = "Airtime Starts from N100";
+    alertAmount.style.color = "red";
+  } else {
+    alertAmount.style.display = "none";
+  }
+};
 
 //checks for input of the user immediately
 userInputElement.oninput = function () {
@@ -164,8 +179,6 @@ userInputElement.oninput = function () {
   }
 };
 
-//Value of airtime amount user inputted
-let amount = document.getElementById("airtime-amount");
 //Reference to display message
 let alertPurchase = document.getElementById("alertPurchase");
 

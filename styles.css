@@ -144,6 +144,10 @@ body {
   color: red;
 }
 
+#alertAmount {
+  display: none;
+}
+
 #airtime-amount::-webkit-inner-spin-button,
 #airtime-amount::-webkit-outer-spin-button {
   -webkit-appearance: none;
