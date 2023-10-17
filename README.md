@@ -7,3 +7,14 @@
 - Validates if a number is in the correct format before purchase.
 - Can restrict user from typing in a number, if no network provider is selected.
 - Can restrict user from typing beyond expected digits of a number.(works for international code format also)
+
+## Contributors
+- Prudy \- Team Lead & Javascript (Slack: @Prudy)
+- Ogunleye Emmanuel \- Javascript (slack: @Ogunleye Emmanuel)
+- Suigeneris \- Javascript (Slack: @suigeneris)
+- Ahmed \- CSS (slack: @Ahmed)
+- Onyeka Aribeana \- CSS (Slack: @Onyeka_Aribeana)
+- Isiaq Ridwan \- CSS (Slack: @Isiaq Ridwan Bukola)
+- Tolani \- HTML (Slack: @Tolani)
+- Micheal Ekene \- HTML (Slack: @Madubuike Ekene Michael)
+- Isreal Isaiah \- HTML (Slack: @Israel Isaiah)
