@@ -1,6 +1,8 @@
 # Airtime Purchase App
 
 ## Features.
-- validation of network provider of number.
-- works for international code number for Nigeria.
-
+- Can detect network provider of a number.
+- Can detect number of a specific network provider.
+- Works for international code number for Nigeria.
+- Validates if a number is in the correct format before purchase.
+- Can restrict user from typing in a number, if no network provider is selected.
