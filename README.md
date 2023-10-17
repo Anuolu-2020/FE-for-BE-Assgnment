@@ -10,7 +10,7 @@
 
 ## Contributors
 - Prudy \- Team Lead & Javascript (Slack: @Prudy)
-- Ogunleye Emmanuel \- Javascript (slack: @Ogunleye Emmanuel)
+- Ogunleye Emmanuel \- Javascript (slack: @Ogunleye Emmanuel, Github: https://github.com/Anuolu-2020/)
 - Suigeneris \- Javascript (Slack: @suigeneris)
 - Ahmed \- CSS (slack: @Ahmed)
 - Onyeka Aribeana \- CSS (Slack: @Onyeka_Aribeana)
