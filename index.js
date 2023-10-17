@@ -5,12 +5,13 @@ let networkLogo = document.getElementById("networkLogo");
 let networkCarrier = document.getElementById("network-carrier");
 let alertAmount = document.getElementById("alertAmount");
 
-//Value of airtime amount user inputted
+//Value of airtime amount user inputted reference
 let amount = document.getElementById("airtime-amount");
 
+//Purchase button reference
 let submit = document.getElementById("submit");
 
-//Amount validator
+//Airtime Amount validator
 amount.oninput = function () {
   if (amount.value / 2 < 50 || amount.value % 2 !== 0) {
     alertAmount.style.display = "block";
@@ -23,36 +24,33 @@ amount.oninput = function () {
   }
 };
 
-//checks for input of the user immediately
+//Checks for input of the user immediately
 userInputElement.oninput = function () {
   let phoneNum = userInputElement.value;
 
   //Gets first four digits of normal number
   let numCode = phoneNum.substr(0, 4);
+
   //Gets first seven digits for +234 numbers
   let intNumCode = phoneNum.substr(0, 7);
 
   //Replace +234 with zero
   let newIntNumCode = intNumCode.replace("+234", "0");
 
-  //tracking in an a network provider is selected
+  //Tracking if a network provider is selected
   let selected = false;
-  //tracking if a network provider has being found
+
+  //Tracking if a network provider has being found
   let foundProvider = false;
 
   //For detecting if a number starts with 0 or +234
-  //if it starts with 0 then the maximum digits of the number will be 11 digits
-  //like wise if it starts with starts otherwise e.g +234 maximun digits is 14 digits
-  function detectNumberPattern() {
-    if (numCode.startsWith("0")) {
-      userInputElement.maxLength = "11";
-    } else {
-      userInputElement.maxLength = "14";
-    }
+  //If it starts with 0 then the maximum digits of the number will be 11 digits
+  //Like wise if it starts with starts otherwise e.g +234 maximun digits is 14 digits
+  if (numCode.startsWith("0")) {
+    userInputElement.maxLength = "11";
+  } else {
+    userInputElement.maxLength = "14";
   }
-
-  //calling the function
-  detectNumberPattern();
 
   //Arrays of all the possible prfixes of the network provider
   let mtn = [
@@ -134,7 +132,7 @@ userInputElement.oninput = function () {
   switch (networkCarrier.value) {
     case "Detect":
       selected = true; // updating the selected
-      detectNumberPattern();
+
       mtnValidator();
       airtelValidator();
       gloValidator();
@@ -142,22 +140,18 @@ userInputElement.oninput = function () {
       break;
     case "Mtn":
       selected = true;
-      detectNumberPattern();
       mtnValidator();
       break;
     case "Airtel":
       selected = true;
-      detectNumberPattern();
       airtelValidator();
       break;
     case "Glo":
       selected = true;
-      detectNumberPattern();
       gloValidator();
       break;
     case "9mobile":
       selected = true;
-      detectNumberPattern();
       NmobileValidator();
       break;
     default:
@@ -175,12 +169,12 @@ userInputElement.oninput = function () {
 
   //if network selected but no network provider found
   if (selected && !foundProvider) {
-    feedbackElement.innerText = `No network provider found`;
-    networkLogo.src = "";
-    userInputElement.style.borderColor = "rgb(76, 110, 245)";
+    feedbackElement.innerText = `No network provider found`; //Display message
+    networkLogo.src = ""; //no network provider logo
+    userInputElement.style.borderColor = "rgb(76, 110, 245)"; //Shows the normal input border color
   }
 
-  //final phone number length validator
+  // Phone number length validator before purchasing airtime
   if (
     userInputElement.value.length !== 11 &&
     userInputElement.value.length !== 14
@@ -190,6 +184,36 @@ userInputElement.oninput = function () {
   } else {
     submit.style.cursor = "pointer";
     submit.disabled = false;
+  }
+
+  //checks if international number is in the correct format
+  function intCode() {
+    let intPhoneNum = userInputElement.value;
+    let remainingNum = intPhoneNum.substr(1, 14);
+    if (
+      intPhoneNum.startsWith("+") &&
+      !isNaN(parseFloat(remainingNum)) &&
+      isFinite(remainingNum)
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  /*Checks if there is a network provider for the phone number 
+  and if both the number and international number is in the correct format*/
+  if (
+    (foundProvider &&
+      !isNaN(parseFloat(userInputElement.value)) &&
+      isFinite(userInputElement.value)) ||
+    (foundProvider && intCode())
+  ) {
+    submit.style.cursor = "pointer";
+    submit.disabled = false;
+  } else {
+    submit.style.cursor = "not-allowed";
+    submit.disabled = true;
   }
 };
 
