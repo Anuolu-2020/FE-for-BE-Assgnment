@@ -132,7 +132,6 @@ userInputElement.oninput = function () {
   switch (networkCarrier.value) {
     case "Detect":
       selected = true; // updating the selected
-
       mtnValidator();
       airtelValidator();
       gloValidator();
@@ -167,27 +166,32 @@ userInputElement.oninput = function () {
     feedbackElement.innerText = ""; //Don't display message
   }
 
-  //if network selected but no network provider found
-  if (selected && !foundProvider) {
-    feedbackElement.innerText = `No network provider found`; //Display message
+  //Sets border color normal and no logo
+  function setBorderColorNormal() {
     networkLogo.src = ""; //no network provider logo
     userInputElement.style.borderColor = "rgb(76, 110, 245)"; //Shows the normal input border color
   }
 
-  // Phone number length validator before purchasing airtime
-  if (
-    userInputElement.value.length !== 11 &&
-    userInputElement.value.length !== 14
-  ) {
-    submit.style.cursor = "not-allowed";
-    submit.disabled = true;
-  } else {
-    submit.style.cursor = "pointer";
-    submit.disabled = false;
+  //if network selected but no network provider found
+  if (networkCarrier.value === "Detect" && !foundProvider) {
+    feedbackElement.innerText = `No network provider found`; //Display message
+    setBorderColorNormal();
+  } else if (networkCarrier.value === "Mtn" && !foundProvider) {
+    feedbackElement.innerText = `Not A Mtn Number`;
+    setBorderColorNormal();
+  } else if (networkCarrier.value === "Glo" && !foundProvider) {
+    feedbackElement.innerText = `Not A Glo Number`;
+    setBorderColorNormal();
+  } else if (networkCarrier.value === "Airtel" && !foundProvider) {
+    feedbackElement.innerText = `Not An Aitel Number`;
+    setBorderColorNormal();
+  } else if (networkCarrier.value === "9mobile" && !foundProvider) {
+    feedbackElement.innerText = `Not An 9mobile Number`;
+    setBorderColorNormal();
   }
 
   //checks if international number is in the correct format
-  function intCode() {
+  function intCodeFormat() {
     let intPhoneNum = userInputElement.value;
     let remainingNum = intPhoneNum.substr(1, 14);
     if (
@@ -201,13 +205,36 @@ userInputElement.oninput = function () {
     return false;
   }
 
-  /*Checks if there is a network provider for the phone number 
-  and if both the number and international number is in the correct format*/
-  if (
-    (foundProvider &&
+  //checks if the local phone number is in the correct format
+  function numFormat() {
+    if (
       !isNaN(parseFloat(userInputElement.value)) &&
-      isFinite(userInputElement.value)) ||
-    (foundProvider && intCode())
+      isFinite(userInputElement.value)
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  // Phone number length validator before purchasing airtime
+  function phoneNumberLengthValidator() {
+    if (
+      (userInputElement.value.startsWith("0") &&
+        userInputElement.value.length !== 11) ||
+      (userInputElement.value.startsWith("+") &&
+        userInputElement.value.length !== 14)
+    ) {
+      return false;
+    }
+    return true;
+  }
+
+  /*Checks if there is a network provider for the phone number, 
+  if both the number and international number is in the correct format
+  and in the required number of digits*/
+  if (
+    (foundProvider && numFormat() && phoneNumberLengthValidator()) ||
+    (foundProvider && intCodeFormat() && phoneNumberLengthValidator())
   ) {
     submit.style.cursor = "pointer";
     submit.disabled = false;
