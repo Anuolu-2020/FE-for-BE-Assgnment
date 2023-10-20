@@ -251,5 +251,5 @@ let alertPurchase = document.getElementById("alertPurchase");
 document.getElementById("purchaseForm").addEventListener("submit", () => {
   alertPurchase.style.display = "block";
   alertPurchase.style.backgroundColor = "green";
-  alertPurchase.textContent = `You have Successfully Purchased ${amount.value} worth of ${networkCarrier.value} Airtime for ${userInputElement.value}`;
+  alertPurchase.textContent = `You have Successfully Purchased N${amount.value} worth of ${networkCarrier.value} Airtime for ${userInputElement.value}`;
 });
